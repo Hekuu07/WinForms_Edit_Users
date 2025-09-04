@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form2 : Form
+    {
+        private readonly ShopDBEntities context;
+        public Form2()
+        {
+            InitializeComponent();
+            context = new ShopDBEntities();
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var newCustomer = new Customers
+            {
+                FName = textBox1.Text,
+                LName = textBox2.Text,
+                MName = textBox3.Text,
+                Address1 = textBox4.Text,
+                Address2 = textBox5.Text,
+                City = textBox6.Text,
+                Phone = textBox7.Text,
+                DateInSystem = DateTime.Now,
+
+            };
+
+            context.Customers.Add(newCustomer);
+           
+
+            if (textBox1.Text != string.Empty &
+                textBox2.Text != string.Empty &
+                textBox3.Text != string.Empty &
+                textBox4.Text != string.Empty &
+                textBox5.Text != string.Empty &
+                textBox6.Text != string.Empty &
+                textBox7.Text != string.Empty)
+            {
+                Close();
+                
+            }
+            else
+            {
+                MessageBox.Show("Заполните поля!!!");
+            }
+            context.SaveChanges();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
