@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Btn_Click_Ok(object sender, EventArgs e)
         {
             var newCustomer = new Customers
             {
