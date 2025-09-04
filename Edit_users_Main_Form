@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+
+        private readonly ShopDBEntities context;
+
+        public Form1()
+        {
+            InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            context = new ShopDBEntities();
+            dataGridView1.DataSource = context.Customers.ToList();
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            context.SaveChanges();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var deleteRow = dataGridView1.CurrentRow.DataBoundItem as Customers;
+            context.Customers.Remove(deleteRow);
+            context.SaveChanges();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var formDes = new Form2();
+            formDes.StartPosition = FormStartPosition.CenterParent;
+            formDes.ShowDialog();   
+
+           
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = context.Customers.ToList();
+        }
+    }
+}
